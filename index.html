@@ -16,25 +16,25 @@
     <h1 class ="text-center">Weather Dashboard</h1>
 </header>
 <!-- This will be the serach bar  -->
-<main class="flex-row justify-space-between row">
-    <div class="col-12 col-md-4">
+<main class="flex-row justify-space-between ">
+    <div class="col-12 col-md-4 row">
         <div class ="card">
             <h3 class ="card-header text-uppercase">Search for a City:</h3>
             <form id="user-form" class="card-body">
                 <input name ="city" id ="cityname" type ="text" autofocus ="true" class ="city-input"/>
-                <button class ="btn" type ="button"> <i class="fas fa-search"></i>Search</button>
+                <button class ="btn" type ="button"> Search <i class="fas fa-search"></i></button>
             </form>
         </div>
     </div>
 </main>
 
 <!-- This will be the display last serach -->
-<div >
-    <form id ="history"></form>
+<div id ="history">
+    <button class ="delete" type ="button">Clear</button>
 </div>
 <!-- This will display city , date, temp:, wind:, Humidity:,UV:-->
 <div>
-    <div>
+    <div id class="col-md-9 pt-4">
         
     </div>
 </div>
@@ -46,7 +46,11 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="./assets/js/script.js"></script>
 </body>
