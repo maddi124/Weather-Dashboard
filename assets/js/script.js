@@ -17,7 +17,7 @@ $('.btn').on('click',function(){
         console.log(list);
 
     var searchDiv = $("<button class='historylist'>").text(list);
-    var psearch= $('<div>');
+    var psearch= $('<div class = "cardlist">');
     psearch.append(searchDiv)
     $('#history').prepend(psearch);        
 });
@@ -27,7 +27,10 @@ $('.btn').on('click',function(){
 
 $('.delete').on('click',function(){
     console.log('this is the clear button');
-    localStorage.removeItem(list);
+    $('.cardlists').remove();
+    $('.historylist').remove();
+
+    localStorage.removeItem('card');
 });
 
 //weathersearch();
