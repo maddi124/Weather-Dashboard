@@ -68,12 +68,17 @@ header {
     transform: translate(0, 0);
     box-shadow: 2px 2px black;
 }
-.historylist{
-    display: inline;
+.historylist {
+    display: block;
     width: 29%;
     margin: 5px;
     padding: 10px;
     font-size: 20px;
     border: 3px solid black;
     border-radius: 10px;
+}
+.historylist:hover{
+    color: #ccdad1;
+    background-color: rgb(37, 105, 148);
+    transform: translate(0, 0);
 }

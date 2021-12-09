@@ -1,10 +1,8 @@
-// var APIkey ='4e460ef796224efaf5dab593e57a5787';
-// var endpoint ='api.openweathermap.org';
+var APIkey ='4e460ef796224efaf5dab593e57a5787';
 $(document).ready(function(){
-
+//Search button 
 $('.btn').on('click',function(){
         console.log('this is search button');
-
     var text= $(this).siblings('.city-input').val();
         console.log(text);
     var card= $(this).parent().attr('id')
@@ -12,19 +10,18 @@ $('.btn').on('click',function(){
     localStorage.setItem('card',JSON.stringify(text));
     // This will clear the value in input 
      $(".city-input").val("");
-
+   
+       
+// History List
     var list =JSON.parse(localStorage.getItem('card'));
         console.log(list);
-
+weather(list);
     var searchDiv = $("<button class='historylist'>").text(list);
     var psearch= $('<div class = "cardlist">');
     psearch.append(searchDiv)
     $('#history').prepend(psearch);        
 });
-
-//function weathersearch(){}
-
-
+// Clear button 
 $('.delete').on('click',function(){
     console.log('this is the clear button');
     $('.cardlists').remove();
@@ -32,9 +29,20 @@ $('.delete').on('click',function(){
 
     localStorage.removeItem('card');
 });
+function weather(list){
+var endpoint ='https://api.openweathermap.org/data/2.5/weather?q='+ list +'&appid=4e460ef796224efaf5dab593e57a5787';
+    
+    $.ajax({
+        url:endpoint,
+        //method:'GET',
+        success: function(data){
+            console.log('success', data);
+            
+        }
+    });
+};
 
-//weathersearch();
-
+weather();
 });
 
 // localStorage.clear();
