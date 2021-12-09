@@ -3,16 +3,15 @@
 $(document).ready(function(){
 
 $('.btn').on('click',function(){
-    console.log('this is search button');
-    // var cityinput =$('#city-input').val();
-    //     console.log (cityinput);
+        console.log('this is search button');
 
     var text= $(this).siblings('.city-input').val();
         console.log(text);
     var card= $(this).parent().attr('id')
         console.log(card);
     localStorage.setItem('card',JSON.stringify(text));
-    // weather(cityinput);
+    // This will clear the value in input 
+     $(".city-input").val("");
 
     var list =JSON.parse(localStorage.getItem('card'));
         console.log(list);
@@ -25,13 +24,14 @@ $('.btn').on('click',function(){
 
 //function weathersearch(){}
 
-function deletelist(){
+
 $('.delete').on('click',function(){
     console.log('this is the clear button');
-});
-}
-//weathersearch();
+    localStorage.removeItem(list);
 });
 
+//weathersearch();
+
+});
 
 // localStorage.clear();
