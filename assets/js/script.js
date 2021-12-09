@@ -1,5 +1,3 @@
-var historylist=document.querySelector('#history');
-var divEl = document.createElement("div");
 // var APIkey ='4e460ef796224efaf5dab593e57a5787';
 // var endpoint ='api.openweathermap.org';
 $(document).ready(function(){
@@ -19,10 +17,10 @@ $('.btn').on('click',function(){
     var list =JSON.parse(localStorage.getItem('card'));
         console.log(list);
 
-    // var searchDiv = $("<button class='list-group-item m-2 col-12'>").text(list);
-    // var psearch= $('<div>');
-    // psearch.append(searchDiv)
-    // $('#history').prepend(psearch);        
+    var searchDiv = $("<button class='historylist'>").text(list);
+    var psearch= $('<div>');
+    psearch.append(searchDiv)
+    $('#history').prepend(psearch);        
 });
 
 //function weathersearch(){}
