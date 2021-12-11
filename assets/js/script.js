@@ -5,9 +5,9 @@ $(document).ready(function(){
     $('.btn').on('click',function(){
             console.log('this is search button');
         var text= $(this).siblings('.city-input').val();
-            console.log(text);
+            //console.log(text);
         var card= $(this).parent().attr('id')
-            console.log(card);
+           // console.log(card);
         localStorage.setItem('card',JSON.stringify(text));
         // This will clear the value in input 
         $(".city-input").val("");
@@ -15,7 +15,7 @@ $(document).ready(function(){
         
         // History List
         var list =JSON.parse(localStorage.getItem('card'));
-            console.log(list);
+           // console.log(list);
         weather(list);
         forcast(list);
         var searchDiv = $("<button class='historylist'>").text(list);
@@ -41,22 +41,16 @@ $(document).ready(function(){
             method:'GET',
         
         }).then(function(response){
-        // console.log(response);
+         console.log(response);
             $(order).empty();
-            
-            order.append('<h2>'+ list + '(' + date + ')'+ imgicon +'</h2>');
+            var img= response.weather[0].icon;
+            console.log(img);
+            order.append('<h2> '+ list + ' (' + date + ')<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h2>');
             order.append ('<h4>Temp: '+ response.main.temp +'</h4>');
-            order.append ('<h4> Wind: '+response.wind.speed+ '</h4>');
-            order.append ('<h4> Humidity: '+ response.main.humidity+'</h4>');
+            order.append ('<h4>Wind: '+response.wind.speed+ '</h4>');
+            order.append ('<h4>Humidity: '+ response.main.humidity+'</h4>');
             order.append ('<h4> UV: </h4>');
-            var img=response.weather[0].main;
-
-                if(img ==='Mist'){
-            var imgicon= order.append('<img scr=http://openweathermap.org/img/wn/50d.png</img>');
-            }
-            else if (img ==='Rain'){
-
-        }
+    
             })
     };
     function forcast(list){
@@ -67,15 +61,15 @@ $(document).ready(function(){
             url:days,
             method:'GET',
         }).then(function(response){
-            console.log(response);
+           // console.log(response);
             var results = response.list;
-            console.log(results);
+           // console.log(results);
             $(cast).empty();
             for (var i=0;i<results.length;i+=8){
               // console.log(results.length);
-               var set=$("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
-               set.append('<h5>'+results[i].dt_txt.substr(0,10) +'</h5>');
-                console.log(results.dt);
+              var img= results[i].weather[0].icon;
+               var set=$("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 12rem;'>");
+               set.append('<h5>'+results[i].dt_txt.substr(0,10) +'<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h5>');
                 set.append('<h5>Temp: '+ results[i].main.temp +'</h5>');
                 set.append('<h5>Wind: '+ results[i].wind.speed+'</h5>');
                 set.append('<h5> Humidity: '+ results[i].main.humidity+'</h5>');
