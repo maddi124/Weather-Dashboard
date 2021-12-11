@@ -83,7 +83,5 @@ header {
     transform: translate(0, 0);
 }
  .currentweather{
-     /* width: 42%;
-    height: 63%;  */
     border:3px solid black;
 } 
