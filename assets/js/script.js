@@ -41,12 +41,19 @@ $('.btn').on('click',function(){
         console.log(response);
         $(order).empty();
         
-        order.append('<h2>'+ list + '(' + date + ')'+'</h2>');
+        order.append('<h2>'+ list + '(' + date + ')'+ imgicon +'</h2>');
         order.append ('<h4>Temp:'+ response.main.temp +'</h4>');
         order.append ('<h4> Wind:'+response.wind.speed+ '</h4>');
         order.append ('<h4> Humidity:'+ response.main.humidity+'</h4>');
         order.append ('<h4> UV: </h4>');
+        var img=response.weather[0].main;
 
+            if(img ==='Mist'){
+           var imgicon= order.append('<img scr=http://openweathermap.org/img/wn/50d.png</img>');
+        }
+        else if (img ==='Rain'){
+
+     }
         })
     };
     

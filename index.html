@@ -16,8 +16,8 @@
     <h1 class ="text-center">Weather Dashboard</h1>
 </header>
 <!-- This will be the serach bar  -->
-<main class="flex-row justify-space-between ">
-    <div class="col-12 col-md-4 row">
+<main class=" row flex-row justify-space-between ">
+    <div class="col-12 col-md-4 ">
         <div class ="card">
             <h3 class ="card-header text-uppercase">Search for a City:</h3>
             <form id="user-form" class="card-body">
@@ -25,18 +25,20 @@
                 <button class ="btn" type ="button"> Search <i class="fas fa-search"></i></button>
             </form>
         </div>
-    </div>
+        </div>
+    <div id="info " class="currentweather col-12 col-md-8 ">
+    
+    <div id ="box" class="border rounded"> </div>
+</div>
 
+</main>
 <!-- This will be the display last serach -->
 <div id ="history">
     <button class ="delete" type ="button">Clear</button>
 </div>
 <!-- This will display city , date, temp:, wind:, Humidity:,UV:-->
-<div id="info " class="currentweather col-12 col-md-4 position-relative top-50 start-50 translate-middle">
-    
-    <div id ="box" class="border rounded"> </div>
-</div>
-</main>
+
+
 <!-- This will display 5-day forecast  -->
 <div>
 
