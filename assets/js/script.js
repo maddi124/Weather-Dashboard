@@ -1,4 +1,5 @@
 var APIkey ='4e460ef796224efaf5dab593e57a5787';
+var date = moment().format('L'); 
 $(document).ready(function(){
 //Search button 
 $('.btn').on('click',function(){
@@ -12,37 +13,45 @@ $('.btn').on('click',function(){
      $(".city-input").val("");
    
        
-// History List
+    // History List
     var list =JSON.parse(localStorage.getItem('card'));
         console.log(list);
-weather(list);
+    weather(list);
     var searchDiv = $("<button class='historylist'>").text(list);
     var psearch= $('<div class = "cardlist">');
     psearch.append(searchDiv)
     $('#history').prepend(psearch);        
-});
-// Clear button 
-$('.delete').on('click',function(){
+    });
+    // Clear button 
+    $('.delete').on('click',function(){
     console.log('this is the clear button');
     $('.cardlists').remove();
     $('.historylist').remove();
 
     localStorage.removeItem('card');
-});
-function weather(list){
-var endpoint ='https://api.openweathermap.org/data/2.5/weather?q='+ list +'&appid=4e460ef796224efaf5dab593e57a5787';
-    
+    });
+    function weather(list){
+    var endpoint ='https://api.openweathermap.org/data/2.5/weather?q='+ list +'&units=imperial&appid=4e460ef796224efaf5dab593e57a5787';
+    var order=$('#box');
     $.ajax({
         url:endpoint,
-        //method:'GET',
-        success: function(data){
-            console.log('success', data);
-            
-        }
-    });
-};
+        method:'GET',
+       
+    }).then(function(response){
+        console.log(response);
+        $(order).empty();
+        
+        order.append('<h2>'+ list + '(' + date + ')'+'</h2>');
+        order.append ('<h4>Temp:'+ response.main.temp +'</h4>');
+        order.append ('<h4> Wind:'+response.wind.speed+ '</h4>');
+        order.append ('<h4> Humidity:'+ response.main.humidity+'</h4>');
+        order.append ('<h4> UV: </h4>');
 
-weather();
+        })
+    };
+    
+
+    weather();
 });
 
 // localStorage.clear();
