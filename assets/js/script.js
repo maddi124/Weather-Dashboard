@@ -73,10 +73,10 @@ $(document).ready(function(){
             for (var i=0;i<results.length;i+=8){
                 console.log(results.length);
                 var set=$("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
-               set.append(results[i].dt_text);
-                set.append('<h3>Temp:'+ results[i].main.temp +'</h3>');
-                set.append('<h3>Wind:'+ results[i].wind.speed+'</h3>');
-                set.append('<h3> Humidity:'+ results[i].main.humidity+'</h3>');
+                set.append('<h5>'+results[i].dt_text)+'</h5>';
+                set.append('<h5>Temp:'+ results[i].main.temp +'</h5>');
+                set.append('<h5>Wind:'+ results[i].wind.speed+'</h5>');
+                set.append('<h5> Humidity:'+ results[i].main.humidity+'</h5>');
             $(cast).append(set);
             
             }
