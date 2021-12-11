@@ -45,9 +45,9 @@ $(document).ready(function(){
             $(order).empty();
             
             order.append('<h2>'+ list + '(' + date + ')'+ imgicon +'</h2>');
-            order.append ('<h4>Temp:'+ response.main.temp +'</h4>');
-            order.append ('<h4> Wind:'+response.wind.speed+ '</h4>');
-            order.append ('<h4> Humidity:'+ response.main.humidity+'</h4>');
+            order.append ('<h4>Temp: '+ response.main.temp +'</h4>');
+            order.append ('<h4> Wind: '+response.wind.speed+ '</h4>');
+            order.append ('<h4> Humidity: '+ response.main.humidity+'</h4>');
             order.append ('<h4> UV: </h4>');
             var img=response.weather[0].main;
 
@@ -70,15 +70,17 @@ $(document).ready(function(){
             console.log(response);
             var results = response.list;
             console.log(results);
+            $(cast).empty();
             for (var i=0;i<results.length;i+=8){
-                console.log(results.length);
-                var set=$("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
-                set.append('<h5>'+results[i].dt_text)+'</h5>';
-                set.append('<h5>Temp:'+ results[i].main.temp +'</h5>');
-                set.append('<h5>Wind:'+ results[i].wind.speed+'</h5>');
-                set.append('<h5> Humidity:'+ results[i].main.humidity+'</h5>');
-            $(cast).append(set);
-            
+              // console.log(results.length);
+               var set=$("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 11rem;'>");
+               set.append('<h5>'+results[i].dt_txt.substr(0,10) +'</h5>');
+                console.log(results.dt);
+                set.append('<h5>Temp: '+ results[i].main.temp +'</h5>');
+                set.append('<h5>Wind: '+ results[i].wind.speed+'</h5>');
+                set.append('<h5> Humidity: '+ results[i].main.humidity+'</h5>');
+                  $(cast).append(set);
+        
             }
         })
     };
