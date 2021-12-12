@@ -33,8 +33,7 @@ $(document).ready(function(){
         });
     });
        
-   
-    // Clear button 
+// Clear button 
     $('.delete').on('click',function(){
         console.log('this is the clear button');
         $('.cardlists').remove();
@@ -42,28 +41,54 @@ $(document).ready(function(){
 
         localStorage.removeItem('card');
     });
+
 // This will display the current weather in the selected city
     function weather(list){
         var endpoint ='https://api.openweathermap.org/data/2.5/weather?q='+ list +'&units=imperial&appid=4e460ef796224efaf5dab593e57a5787';
         var order=$('#box');
-        
+      
         $.ajax({
             url:endpoint,
             method:'GET',
         
         }).then(function(response){
+            console.log(response);
             $(order).empty();
 
             var img= response.weather[0].icon;
-    
+               
+         var lon=response.coord.lon;
+            console.log(lon);
+        var lat=response.coord.lat;
+            console.log(lat);
             order.append('<h2> '+ list + ' (' + date + ')<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h2>');
-            order.append ('<h4>Temp: '+ response.main.temp +'</h4>');
-            order.append ('<h4>Wind: '+response.wind.speed+ '</h4>');
-            order.append ('<h4>Humidity: '+ response.main.humidity+'</h4>');
-            order.append ('<h4> UV: </h4>');
-    
-            })
+            order.append ('<h4>Temp: '+ response.main.temp +' °F</h4>');
+            order.append ('<h4>Wind: '+response.wind.speed+ ' MPH</h4>');
+            order.append ('<h4>Humidity: '+ response.main.humidity+' %</h4>');
+
+                uvi(lon,lat)
+        })
     };
+    function uvi(lon, lat){
+         var uvindex='https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&exclude=current&appid=4e460ef796224efaf5dab593e57a5787';
+         var order=$('#box');
+         $.ajax({
+            url:uvindex,
+            method:'GET',
+
+        }).then(function(response){
+            console.log(response);
+            var current=response.daily;
+            console.log(current);
+            
+            for (var i=0;i<current.length;i+=8){
+                var onecall=current[i].uvi;
+                console.log(onecall);
+            order.append('<h4> UV Index: '+onecall+'</h4>');
+            }
+        })
+    
+    }
     //This will display the 5 days forcast for the selected city
     function forcast(list){
         var days='https://api.openweathermap.org/data/2.5/forecast?q='+ list +'&units=imperial&appid=4e460ef796224efaf5dab593e57a5787'; 
@@ -80,11 +105,11 @@ $(document).ready(function(){
                 for (var i=0;i<results.length;i+=8){
                 
                 var img= results[i].weather[0].icon;
-                var set=$("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 8.5rem; height: 12rem;'>");
+                var set=$("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 9rem; height: 12rem;'>");
                 set.append('<h5>'+results[i].dt_txt.substr(0,10) +'<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h5>');
-                    set.append('<h5>Temp: '+ results[i].main.temp +'</h5>');
-                    set.append('<h5>Wind: '+ results[i].wind.speed+'</h5>');
-                    set.append('<h5> Humidity: '+ results[i].main.humidity+'</h5>');
+                    set.append('<h6>Temp: '+ results[i].main.temp +' °F</h6>');
+                    set.append('<h6>Wind: '+ results[i].wind.speed+' MPH</h6>');
+                    set.append('<h6> Humidity: '+ results[i].main.humidity+' %</h6>');
 
                     $(cast).append(set);
                 }
@@ -92,6 +117,7 @@ $(document).ready(function(){
     };
     weather();
     forcast();
+
 });
 
 // localStorage.clear();
