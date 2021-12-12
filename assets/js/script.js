@@ -23,22 +23,23 @@ $(document).ready(function(){
         var psearch= $('<div class = "cardlist">');
         psearch.append(searchDiv)
         $('#history').prepend(psearch); 
-
-        }
+        }  
         else{
             alert('Please Enter a City Name');
-        }
+        } 
+      
 // When the button is click it will display the previous selected city info
-    $('.historylist').on('click',function(){
+    $('.historylist').on('click',function(cast,order){
+            $(order).empty();
              weather(list);
-        
+       
              forcast(list);  
-              $(cast).empty();
-
+            $(cast).empty();
         });
+        
     });
 
-// Clear button 
+//This will clear the history list .. Clear button 
     $('.delete').on('click',function(){
         console.log('this is the clear button');
         $('.cardlists').remove();
@@ -68,34 +69,33 @@ $(document).ready(function(){
             order.append ('<h4>Wind: '+response.wind.speed+ ' MPH</h4>');
             order.append ('<h4>Humidity: '+ response.main.humidity+' %</h4>');
 
-                uvi(lon,lat)
+                uvi(lon,lat);
         })
     };
 
     function uvi(lon, lat){
          var uvindex='https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&exclude=current&appid=4e460ef796224efaf5dab593e57a5787';
          var order=$('#box');
-
          $.ajax({
             url:uvindex,
             method:'GET',
 
         }).then(function(response){
+        
             var current=response.daily;
-            
+           
             for (var i=0;i<current.length;i+=8){
                 var onecall=current[i].uvi;
-
-                if(onecall <=2){
+                
+                if(onecall <=2){   
                     order.append('<h4>UV Index: <span style="color:white;background-color:green;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
                 }
-                if(onecall>=5){
-                    order.append('<h4>UV Index: <span style="color:white;background-color:yellow;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
+                if(onecall<=5 && onecall>2){
+                    order.append('<h4>UV Index: <span style="color:black;background-color:yellow;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
                 }
                 if(onecall===7){
-                    order.append('<h4>UV Index: <span style="color:white;background-color:red;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
+                    order.append('<h4>UV Index: <span style="color:black;background-color:red;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
                 }
-            
             }
         })
     
@@ -130,7 +130,6 @@ $(document).ready(function(){
 
     weather();
     forcast();
-
 });
 
 // localStorage.clear();

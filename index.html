@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
@@ -9,14 +10,20 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/style.css"/>
-<!--The header title -->
+
 </head>
+
 <body>
+
 <header>
+<!--The header title -->
     <h1 class ="text-center">Weather Dashboard</h1>
+
 </header>
+
 <!-- This will be the serach bar  -->
 <main class=" row flex-row justify-space-between ">
+
     <div class="col-12 col-md-4 ">
         <div class ="card">
             <h3 class ="card-header text-uppercase">Search for a City:</h3>
@@ -26,24 +33,33 @@
             </form>
         </div>
     </div>
+
     <!-- This will display city , date, temp:, wind:, Humidity:,UV:-->
     <div id="info " class="currentweather col-12 col-md-8 ">
 
         <div id ="box" class="border rounded"> </div>
+
     </div>
+
 </main>
 <!-- This will be the display last serach -->
 <div class="row">
-<div id ="history" class="col-12 col-md-4">
-    <button class ="delete" type ="button">Clear</button>
-</div>
+
+        <div id ="history" class="col-12 col-md-4">
+
+            <button class ="delete" type ="button">Clear</button>
+
+        </div>
 
 
-<!-- This will display 5-day forecast  -->
-<div class='col-8'>
-<h2>5-Days Forcast:</h2>
-<div id="weekendforcast" class="row"></div>
-</div>
+    <!-- This will display 5-day forecast  -->
+    <div class='col-8'>
+
+        <h2>5-Days Forcast:</h2>
+
+            <div id="weekendforcast" class="row"></div>
+
+    </div>
 
 </div>
 
