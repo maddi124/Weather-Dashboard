@@ -16,6 +16,11 @@ to fix this I inserted the API key directly in the API call and this fix the pro
 ```html
 'https://api.openweathermap.org/data/2.5/weather?q='+ list +'&units=imperial&appid=4e460ef796224efaf5dab593e57a5787';
 ``` 
+
+
+https://user-images.githubusercontent.com/92236398/145723013-4603a19d-ac0f-4b84-a092-223175c67a9d.mp4
+
+
 ## User Story
 ```
 AS A traveler
