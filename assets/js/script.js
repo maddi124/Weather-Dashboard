@@ -61,7 +61,7 @@ $(document).ready(function(){
             console.log(lon);
         var lat=response.coord.lat;
             console.log(lat);
-            order.append('<h2> '+ list + ' (' + date + ')<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h2>');
+            order.append('<h2> '+ list.toUpperCase() + ' (' + date + ')<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h2>');
             order.append ('<h4>Temp: '+ response.main.temp +' °F</h4>');
             order.append ('<h4>Wind: '+response.wind.speed+ ' MPH</h4>');
             order.append ('<h4>Humidity: '+ response.main.humidity+' %</h4>');
@@ -84,7 +84,17 @@ $(document).ready(function(){
             for (var i=0;i<current.length;i+=8){
                 var onecall=current[i].uvi;
                 console.log(onecall);
-            order.append('<h4> UV Index: '+onecall+'</h4>');
+
+                if(onecall <=2){
+                    order.append('<h4>UV Index: <span style="color:white;background-color:green;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
+                }
+                if(onecall>=5){
+                    order.append('<h4>UV Index: <span style="color:white;background-color:yellow;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
+                }
+                if(onecall===7){
+                    order.append('<h4>UV Index: <span style="color:white;background-color:red;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
+                }
+            
             }
         })
     
