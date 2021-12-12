@@ -1,7 +1,7 @@
 var APIkey ='4e460ef796224efaf5dab593e57a5787';
 var date = moment().format('L'); 
 $(document).ready(function(){
-//Search button 
+//Search button  
     $('.btn').on('click',function(){
         var text= $(this).siblings('.city-input').val();
         var card= $(this).parent().attr('id')
@@ -9,21 +9,27 @@ $(document).ready(function(){
         localStorage.setItem('card',JSON.stringify(text));
         // This will clear the value in input 
         $(".city-input").val("");
-    
-        
+
+
         // History List
         var list =JSON.parse(localStorage.getItem('card'));
-           
+
+        if(text) {  
+
         weather(list);
         forcast(list);
-
+       
         var searchDiv = $("<button class='historylist'>").text(list.toUpperCase());
         var psearch= $('<div class = "cardlist">');
         psearch.append(searchDiv)
-        $('#history').prepend(psearch);  
+        $('#history').prepend(psearch); 
 
+        }
+        else{
+            alert('Please Enter a City Name');
+        }
+// When the button is click it will display the previous selected city info
     $('.historylist').on('click',function(){
-          console.log("i was clicked");
              weather(list);
         
              forcast(list);  
@@ -31,7 +37,7 @@ $(document).ready(function(){
 
         });
     });
-       
+
 // Clear button 
     $('.delete').on('click',function(){
         console.log('this is the clear button');
@@ -51,15 +57,12 @@ $(document).ready(function(){
             method:'GET',
         
         }).then(function(response){
-            console.log(response);
             $(order).empty();
 
             var img= response.weather[0].icon;
-               
-         var lon=response.coord.lon;
-            console.log(lon);
-        var lat=response.coord.lat;
-            console.log(lat);
+            var lon=response.coord.lon;
+            var lat=response.coord.lat;
+           
             order.append('<h2> '+ list.toUpperCase() + ' (' + date + ')<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h2>');
             order.append ('<h4>Temp: '+ response.main.temp +' °F</h4>');
             order.append ('<h4>Wind: '+response.wind.speed+ ' MPH</h4>');
@@ -68,21 +71,20 @@ $(document).ready(function(){
                 uvi(lon,lat)
         })
     };
+
     function uvi(lon, lat){
          var uvindex='https://api.openweathermap.org/data/2.5/onecall?lat='+ lat +'&lon='+ lon +'&exclude=current&appid=4e460ef796224efaf5dab593e57a5787';
          var order=$('#box');
+
          $.ajax({
             url:uvindex,
             method:'GET',
 
         }).then(function(response){
-            console.log(response);
             var current=response.daily;
-            console.log(current);
             
             for (var i=0;i<current.length;i+=8){
                 var onecall=current[i].uvi;
-                console.log(onecall);
 
                 if(onecall <=2){
                     order.append('<h4>UV Index: <span style="color:white;background-color:green;border-radius:5px;font-weight:bold">'+onecall+'</span></h4>');
@@ -97,8 +99,9 @@ $(document).ready(function(){
             }
         })
     
-    }
-    //This will display the 5 days forcast for the selected city
+    };
+    
+//This will display the 5 days forcast for the selected city
     function forcast(list){
         var days='https://api.openweathermap.org/data/2.5/forecast?q='+ list +'&units=imperial&appid=4e460ef796224efaf5dab593e57a5787'; 
         var cast=$('#weekendforcast');
@@ -112,10 +115,10 @@ $(document).ready(function(){
                 $(cast).empty();
 
                 for (var i=0;i<results.length;i+=8){
-                
                 var img= results[i].weather[0].icon;
                 var set=$("<div class='card shadow-lg text-white bg-primary mx-auto mb-10 p-2' style='width: 9rem; height: 12rem;'>");
-                set.append('<h5>'+results[i].dt_txt.substr(0,10) +'<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h5>');
+                   
+                    set.append('<h5>'+results[i].dt_txt.substr(0,10) +'<img src="http://openweathermap.org/img/wn/'+img+'.png" style="height=40px; width=40px"></h5>');
                     set.append('<h6>Temp: '+ results[i].main.temp +' °F</h6>');
                     set.append('<h6>Wind: '+ results[i].wind.speed+' MPH</h6>');
                     set.append('<h6> Humidity: '+ results[i].main.humidity+' %</h6>');
@@ -124,6 +127,7 @@ $(document).ready(function(){
                 }
             })
     };
+
     weather();
     forcast();
 
