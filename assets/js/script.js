@@ -17,18 +17,17 @@ $(document).ready(function(){
         weather(list);
         forcast(list);
 
-        var searchDiv = $("<button class='historylist'>").text(list);
+        var searchDiv = $("<button class='historylist'>").text(list.toUpperCase());
         var psearch= $('<div class = "cardlist">');
         psearch.append(searchDiv)
         $('#history').prepend(psearch);  
 
     $('.historylist').on('click',function(){
           console.log("i was clicked");
-          
-            weather(list);
-            $(order).empty();
-            forcast(list);  
-            $(cast).empty();
+             weather(list);
+        
+             forcast(list);  
+              $(cast).empty();
 
         });
     });
